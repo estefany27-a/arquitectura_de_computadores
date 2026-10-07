@@ -26,7 +26,7 @@ a{color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:6px 0;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font:800 1.2rem "Bricolage Grotesque",sans-serif;text-decoration:none}
 nav{display:flex;gap:6px;flex-wrap:wrap}
 nav a{text-decoration:none;padding:8px 14px;border-radius:999px;font-weight:600;font-size:.95rem}
@@ -78,11 +78,46 @@ textarea{min-height:120px;resize:vertical}
 .ok{display:none;background:var(--mint);border-radius:10px;padding:12px 14px;font-weight:600}
 .ok.show{display:block}
 
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.about p{color:var(--muted);margin:0 0 14px;max-width:56ch}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.facts div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:20px;color:var(--muted);font-size:.95rem;line-height:1.35}
+.facts strong{display:block;font:800 2rem "Bricolage Grotesque",sans-serif;color:var(--green);margin-bottom:4px}
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.offer{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.offer .tag{align-self:flex-start;background:var(--pine);color:#fff;font-weight:700;font-size:.82rem;padding:4px 12px;border-radius:999px}
+.offer h3{font-size:1.25rem}
+.offer p{margin:0;color:var(--muted);font-size:.96rem}
+.offer .price{margin-top:auto;padding-top:10px;font:800 1.5rem "Bricolage Grotesque",sans-serif;color:var(--signal)}
+.offer .price s{font:400 .95rem Figtree,sans-serif;color:var(--muted);margin-left:8px}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+ol.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+ol.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--green);color:#06231a;font:800 1rem "Bricolage Grotesque",sans-serif;margin-bottom:12px}
+ol.steps h3{font-size:1.15rem;margin-bottom:6px}
+ol.steps p{margin:0;color:var(--muted);font-size:.96rem}
+.note{margin-top:24px;background:var(--mint);border-radius:12px;padding:14px 18px;font-weight:500}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.person{text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px 20px}
+.person svg{width:84px;height:84px}
+.person h3{font-size:1.15rem;margin:12px 0 4px}
+.person p{margin:0;color:var(--muted);font-size:.94rem}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+blockquote{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px}
+blockquote p{margin:0 0 14px}
+blockquote cite{font-style:normal;font-weight:700;font-size:.92rem;color:var(--green)}
+.faq{max-width:760px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+summary{cursor:pointer;padding:16px 20px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--green);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0;padding:0 20px 18px;color:var(--muted)}
+
 footer{background:var(--pine);color:#bfdcd1;padding:28px 0;font-size:.92rem}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 @media (max-width:820px){
-  .hero .wrap,.contact{grid-template-columns:1fr}
+  .hero .wrap,.contact,.about{grid-template-columns:1fr}
   .hero svg{max-width:300px}
   .gallery{grid-template-columns:repeat(2,1fr)}
   nav a{padding:8px 10px}
@@ -100,8 +135,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <span>Vida Sana</span>
     </a>
     <nav aria-label="Principal">
+      <a href="#nosotros">Nosotros</a>
       <a href="#contenido">Contenido</a>
+      <a href="#ofertas">Ofertas</a>
+      <a href="#domicilios">Domicilios</a>
       <a href="#imagenes">Imágenes</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#preguntas">Preguntas</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
@@ -127,6 +167,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </svg>
     </div>
   </div>
+
+  <section id="nosotros" class="band">
+    <div class="wrap about">
+      <div>
+        <h2 class="sec-title">Sobre nosotros</h2>
+        <p>Somos una farmacia de barrio con atención de farmacéuticos titulados. Revisamos cada fórmula contigo, explicamos cómo tomar cada medicamento y te avisamos si hay una alternativa más económica.</p>
+        <p>Trabajamos solo con proveedores autorizados y guardamos los productos con la cadena de frío y las condiciones que exige cada uno.</p>
+      </div>
+      <div class="facts">
+        <div><strong>15 años</strong>atendiendo a la comunidad</div>
+        <div><strong>+5.000</strong>productos disponibles</div>
+        <div><strong>7 días</strong>de atención a la semana</div>
+        <div><strong>60 min</strong>máximo para tu domicilio</div>
+      </div>
+    </div>
+  </section>
 
   <section id="contenido">
     <div class="wrap">
@@ -157,6 +213,33 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="cats" aria-label="Categorías">
         <span>Vitaminas</span><span>Primeros auxilios</span><span>Salud sexual</span><span>Bebés y maternidad</span><span>Ortopedia</span><span>Dermocosmética</span><span>Higiene oral</span>
       </div>
+    </div>
+  </section>
+
+  <section id="ofertas" class="band">
+    <div class="wrap">
+      <h2 class="sec-title">Ofertas de la semana</h2>
+      <p class="lead">Precios especiales mientras duren las existencias.</p>
+      <div class="offers">
+        <article class="offer"><span class="tag">2x1</span><h3>Vitamina C 1 g</h3><p>Tubo de 10 tabletas efervescentes.</p><div class="price">$18.000<s>$36.000</s></div></article>
+        <article class="offer"><span class="tag">-20%</span><h3>Protector solar FPS 50</h3><p>Rostro y cuerpo, resistente al agua.</p><div class="price">$44.000<s>$55.000</s></div></article>
+        <article class="offer"><span class="tag">Kit</span><h3>Botiquín familiar</h3><p>Gasas, antiséptico, termómetro y más.</p><div class="price">$59.000</div></article>
+        <article class="offer"><span class="tag">-10%</span><h3>Línea para bebé</h3><p>Pañales, cremas y toallitas húmedas.</p><div class="price">Todos los martes</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="domicilios">
+    <div class="wrap">
+      <h2 class="sec-title">Domicilios</h2>
+      <p class="lead">Recibe tus productos sin salir de casa en cuatro pasos.</p>
+      <ol class="steps">
+        <li><h3>Escríbenos</h3><p>Envía tu pedido o la foto de tu fórmula por WhatsApp.</p></li>
+        <li><h3>Confirmamos</h3><p>Verificamos disponibilidad y te damos el valor total.</p></li>
+        <li><h3>Preparamos</h3><p>Un farmacéutico revisa y empaca tu pedido.</p></li>
+        <li><h3>Recibes</h3><p>Te lo llevamos a la puerta. Pagas en efectivo o por transferencia.</p></li>
+      </ol>
+      <p class="note">Los medicamentos de control especial solo se entregan con la fórmula original.</p>
     </div>
   </section>
 
@@ -193,7 +276,45 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     </div>
   </section>
 
-  <section id="contacto">
+  <section id="equipo">
+    <div class="wrap">
+      <h2 class="sec-title">Nuestro equipo</h2>
+      <p class="lead">Personas con formación y tiempo para escucharte.</p>
+      <div class="team">
+        <article class="person"><svg viewBox="0 0 84 84" role="img" aria-label="Iniciales LG"><circle cx="42" cy="42" r="42" fill="#1f9d74"/><text x="42" y="52" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="28" fill="#fff">LG</text></svg><h3>Dra. Laura Gómez</h3><p>Química farmacéutica y directora técnica</p></article>
+        <article class="person"><svg viewBox="0 0 84 84" role="img" aria-label="Iniciales AR"><circle cx="42" cy="42" r="42" fill="#0f3d3a"/><text x="42" y="52" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="28" fill="#fff">AR</text></svg><h3>Andrés Rivas</h3><p>Regente de farmacia</p></article>
+        <article class="person"><svg viewBox="0 0 84 84" role="img" aria-label="Iniciales MP"><circle cx="42" cy="42" r="42" fill="#c7431c"/><text x="42" y="52" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="28" fill="#fff">MP</text></svg><h3>Marta Peña</h3><p>Atención al cliente y domicilios</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonios" class="band">
+    <div class="wrap">
+      <h2 class="sec-title">Lo que dicen nuestros clientes</h2>
+      <p class="lead">Opiniones de quienes nos visitan cada semana.</p>
+      <div class="quotes">
+        <blockquote><p>Me explicaron con calma cómo tomar cada medicamento de mi mamá. Se nota que les importa.</p><cite>Carolina R.</cite></blockquote>
+        <blockquote><p>Pedí por WhatsApp y en menos de una hora tenía todo en casa. Muy puntuales.</p><cite>Julián M.</cite></blockquote>
+        <blockquote><p>Siempre encuentro lo que busco y los precios son justos.</p><cite>Don Hernando P.</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="wrap">
+      <h2 class="sec-title">Preguntas frecuentes</h2>
+      <p class="lead">Lo que más nos consultan.</p>
+      <div class="faq">
+        <details><summary>¿Necesito fórmula médica para comprar?</summary><p>Solo para los medicamentos que la exigen por ley. Los de venta libre los puedes comprar directamente.</p></details>
+        <details><summary>¿Cuánto cuesta el domicilio?</summary><p>Es gratis en compras desde $40.000 dentro de nuestra zona de cobertura. Por debajo de ese valor, te informamos el costo antes de confirmar.</p></details>
+        <details><summary>¿Reciben tarjetas y transferencias?</summary><p>Sí, aceptamos efectivo, tarjetas débito y crédito, y transferencias.</p></details>
+        <details><summary>¿Puedo consultar al farmacéutico sin comprar?</summary><p>Claro. La orientación sobre medicamentos y dosis es gratuita, en el mostrador o por WhatsApp.</p></details>
+        <details><summary>¿Hacen devoluciones?</summary><p>Aceptamos cambios de productos sellados con factura. Por seguridad, no recibimos medicamentos ya despachados.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="band">
     <div class="wrap">
       <h2 class="sec-title">Contacto</h2>
       <p class="lead">Escríbenos o llámanos. Te respondemos en el día.</p>
