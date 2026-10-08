@@ -113,11 +113,34 @@ summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--green);tra
 details[open] summary::after{transform:rotate(45deg)}
 details p{margin:0;padding:0 20px 18px;color:var(--muted)}
 
+.channels{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:28px}
+.channel{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:18px}
+.channel h3{font-size:1.05rem;margin-bottom:4px}
+.channel p{margin:0;color:var(--muted);font-size:.93rem}
+.channel b{color:var(--green)}
+.alert{background:var(--mint);border-left:5px solid var(--signal);border-radius:10px;padding:14px 18px;margin-bottom:28px;font-weight:500}
+.help{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start}
+.panel{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:14px}
+.panel h3{font-size:1.3rem}
+.panel .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+select{font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);width:100%}
+.result{display:none;background:var(--mint);border-radius:10px;padding:14px 16px}
+.result.show{display:block}
+.result strong{font:800 1.2rem "Bricolage Grotesque",sans-serif}
+.sla{width:100%;border-collapse:collapse;margin-top:28px;background:var(--bg);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sla th,.sla td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);font-size:.95rem}
+.sla th{background:var(--mint);font-family:"Bricolage Grotesque",sans-serif}
+.sla tr:last-child td{border-bottom:0}
+.tblwrap{overflow-x:auto}
+.helplink{margin-top:22px}
+.helplink a{font-weight:600;color:var(--green)}
+
 footer{background:var(--pine);color:#bfdcd1;padding:28px 0;font-size:.92rem}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 @media (max-width:820px){
-  .hero .wrap,.contact,.about{grid-template-columns:1fr}
+  .hero .wrap,.contact,.about,.help{grid-template-columns:1fr}
+  .panel .row{grid-template-columns:1fr}
   .hero svg{max-width:300px}
   .gallery{grid-template-columns:repeat(2,1fr)}
   nav a{padding:8px 10px}
@@ -141,7 +164,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <a href="#domicilios">Domicilios</a>
       <a href="#imagenes">Imágenes</a>
       <a href="#equipo">Equipo</a>
-      <a href="#preguntas">Preguntas</a>
+      <a href="#ayuda">Mesa de ayuda</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
@@ -314,7 +337,75 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     </div>
   </section>
 
-  <section id="contacto" class="band">
+  <section id="ayuda" class="band">
+    <div class="wrap">
+      <h2 class="sec-title">Mesa de ayuda</h2>
+      <p class="lead">Resolvemos pedidos, reclamos y dudas sobre tus productos. Elige el canal que prefieras o abre una solicitud.</p>
+
+      <div class="channels">
+        <div class="channel"><h3>WhatsApp</h3><p>+57 000 000 0000<br>Respuesta en <b>15 minutos</b> en horario de atención.</p></div>
+        <div class="channel"><h3>Teléfono</h3><p>+57 000 000 0000<br>Lunes a sábado, 8:00 a. m. a 6:00 p. m.</p></div>
+        <div class="channel"><h3>Correo</h3><p>ayuda@vidasana.example<br>Respuesta en <b>24 horas</b>.</p></div>
+        <div class="channel"><h3>En la farmacia</h3><p>Pregunta por el farmacéutico de turno, sin cita.</p></div>
+      </div>
+
+      <p class="alert">Si tienes una urgencia médica, llama a la línea de emergencias de tu país o acude a urgencias. Esta mesa de ayuda no atiende emergencias.</p>
+
+      <div class="help">
+        <form class="panel" id="tk">
+          <h3>Abrir una solicitud</h3>
+          <div class="row">
+            <label>Nombre<input name="n" required autocomplete="name"></label>
+            <label>Teléfono o correo<input name="c" required autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Tipo de solicitud
+              <select name="t" required>
+                <option value="">Selecciona una opción</option>
+                <option>Estado de un pedido</option>
+                <option>Problema con un producto</option>
+                <option>Reclamo o queja</option>
+                <option>Cambio o devolución</option>
+                <option>Consulta sobre mi fórmula</option>
+                <option>Reacción adversa a un medicamento</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label>Prioridad
+              <select name="p"><option>Normal</option><option>Urgente</option></select>
+            </label>
+          </div>
+          <label>Número de pedido o factura (opcional)<input name="o"></label>
+          <label>Describe lo que pasó<textarea name="d" required placeholder="Incluye el nombre del producto y la fecha de compra si aplica"></textarea></label>
+          <button class="btn main" type="submit">Enviar solicitud</button>
+          <div class="result" id="tkok" role="status"></div>
+        </form>
+
+        <form class="panel" id="st">
+          <h3>Consultar una solicitud</h3>
+          <label>Número de solicitud<input name="num" required placeholder="Ejemplo: VS-20261007-1234"></label>
+          <button class="btn main" type="submit">Consultar estado</button>
+          <div class="result" id="stok" role="status"></div>
+        </form>
+      </div>
+
+      <div class="tblwrap">
+        <table class="sla">
+          <thead><tr><th>Tipo de solicitud</th><th>Tiempo de respuesta</th></tr></thead>
+          <tbody>
+            <tr><td>Estado de un pedido o domicilio</td><td>Hasta 1 hora</td></tr>
+            <tr><td>Consulta sobre fórmula o producto</td><td>Hasta 24 horas</td></tr>
+            <tr><td>Cambio o devolución</td><td>Hasta 48 horas</td></tr>
+            <tr><td>Reclamo o queja</td><td>Hasta 48 horas</td></tr>
+            <tr><td>Reacción adversa a un medicamento</td><td>El mismo día, con prioridad</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="helplink">¿Buscas una respuesta rápida? Revisa las <a href="#preguntas">preguntas frecuentes</a>.</p>
+    </div>
+  </section>
+
+  <section id="contacto">
     <div class="wrap">
       <h2 class="sec-title">Contacto</h2>
       <p class="lead">Escríbenos o llámanos. Te respondemos en el día.</p>
@@ -358,6 +449,32 @@ document.getElementById('f').addEventListener('submit',function(e){
   document.getElementById('ok').classList.add('show');
   this.reset();
 });
+
+(function(){
+  var KEY='vsTickets';
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+  function save(a){try{localStorage.setItem(KEY,JSON.stringify(a));return true}catch(e){return false}}
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+  var tkOk=document.getElementById('tkok'), stOk=document.getElementById('stok');
+  document.getElementById('tk').addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=this, d=new Date(), pad=function(n){return String(n).padStart(2,'0')};
+    var id='VS-'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+Math.floor(1000+Math.random()*9000);
+    var urgent=f.p.value==='Urgente';
+    var t={id:id,tipo:f.t.value,prioridad:f.p.value,fecha:d.toLocaleString('es-CO'),estado:'Recibida'};
+    var a=load();a.push(t);var saved=save(a);
+    tkOk.innerHTML='Solicitud recibida. Tu número es <strong>'+id+'</strong>.<br>Te responderemos '+(urgent?'con prioridad, lo antes posible':'dentro del tiempo indicado en la tabla')+'.'+(saved?'':' Guarda este número, no se pudo almacenar en tu navegador.');
+    tkOk.classList.add('show');f.reset();
+  });
+  document.getElementById('st').addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=this.num.value.trim().toUpperCase();
+    var t=load().filter(function(x){return x.id===n})[0];
+    stOk.innerHTML=t?'<strong>'+esc(t.id)+'</strong><br>Estado: '+esc(t.estado)+'<br>Tipo: '+esc(t.tipo)+' ('+esc(t.prioridad)+')<br>Registrada: '+esc(t.fecha)
+      :'No encontramos esa solicitud en este dispositivo. Revisa el número o escríbenos por WhatsApp.';
+    stOk.classList.add('show');
+  });
+})();
 </script>
 </body>
 </html>
